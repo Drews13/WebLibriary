@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+		http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>User Management Web Application</display-name>
+
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/Error.jsp</location>
+	</error-page>
+    
+	<filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>net.oldlibrary.controller.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/</url-pattern>
+        <servlet-name>Reader</servlet-name>
+        <servlet-name>Librarian</servlet-name>
+        <servlet-name>Common</servlet-name>
+    </filter-mapping>
+    
+    <filter>
+        <filter-name>RoleAccessFilter</filter-name>
+        <filter-class>net.oldlibrary.controller.RoleAccessFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>RoleAccessFilter</filter-name>
+        <url-pattern>/</url-pattern>
+        <servlet-name>Librarian</servlet-name>
+        <servlet-name>Reader</servlet-name>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>UserAuth</servlet-name>
+        <servlet-class>net.oldlibrary.controller.UserAuth</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserAuth</servlet-name>
+        <url-pattern>/logout</url-pattern>
+        <url-pattern>/register</url-pattern>
+        <url-pattern>/insert</url-pattern>
+        <url-pattern>/route</url-pattern>
+        <url-pattern>/change_lang</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Reader</servlet-name>
+        <servlet-class>net.oldlibrary.controller.Reader</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Reader</servlet-name>
+        <url-pattern>/list_orders</url-pattern>
+        <url-pattern>/list_books</url-pattern>
+        <url-pattern>/search_book</url-pattern>
+        <url-pattern>/order_book</url-pattern>
+        <url-pattern>/close_order</url-pattern>
+    </servlet-mapping>
+    
+     <servlet>
+        <servlet-name>Librarian</servlet-name>
+        <servlet-class>net.oldlibrary.controller.Librarian</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Librarian</servlet-name>
+        <url-pattern>/list_orders</url-pattern>
+        <url-pattern>/confirm_order</url-pattern>
+    </servlet-mapping>
+    
+     <servlet>
+        <servlet-name>Common</servlet-name>
+        <servlet-class>net.oldlibrary.controller.Common</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Common</servlet-name>
+        <url-pattern>/courses</url-pattern>
+        <url-pattern>/profile</url-pattern>
+        <url-pattern>/edit_user</url-pattern>
+        <url-pattern>/update_user</url-pattern>
+        <url-pattern>/delete_user</url-pattern>
+    </servlet-mapping>
+</web-app>
